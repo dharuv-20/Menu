@@ -113,8 +113,8 @@ const Review = ({ cart, updateQuantity, selectedList, totalCount, totalPrice }) 
       // Generate the 1080x1920 branded base64 image URL
       const imgData = await generateImageFromElement(captureTargetRef.current);
       
-      // Navigate to Success screen, passing the image url as state
-      navigate('/success', { state: { imgData, guestName: trimmedName } });
+      // Navigate to Success screen, passing the image url, selected items list and total price as state
+      navigate('/success', { state: { imgData, guestName: trimmedName, selectedList, totalPrice } });
     } catch (err) {
       console.error(err);
       setGenerationError("Unable to generate your order summary.");

@@ -16,11 +16,38 @@ const dataURLtoFile = (dataurl, filename) => {
   return new File([u8arr], filename, { type: mime });
 };
 
+const KITCHEN_WHATSAPP_NUMBER = "919996461616"; // Official Tatsaaraa Kavan Kitchen WhatsApp Number
+
 const Success = ({ clearSelection }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { imgData, guestName } = location.state || {};
+  const { imgData, guestName, selectedList, totalPrice } = location.state || {};
   const [shareAlert, setShareAlert] = useState("");
+
+  const handleSendWhatsApp = () => {
+    if (!selectedList || selectedList.length === 0) return;
+
+    let message = `🏔️ *Tatsaaraa Kavan Dining Request* 🏔️\n`;
+    message += `I would like to request the following home-cooked meal:\n\n`;
+    message += `👤 *Guest:* ${guestName || 'Guest'}\n`;
+    message += `📅 *Date:* ${new Date().toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}\n`;
+    message += `⏰ *Time:* ${new Date().toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}\n\n`;
+    message += `*Selected Items:*\n`;
+
+    selectedList.forEach(({ item, quantity }) => {
+      message += `• ${item.name} × ${quantity} (₹${item.price * quantity})\n`;
+    });
+
+    message += `\n━━━━━━━━━━━━━━━━━━\n`;
+    message += `💰 *Grand Total:* ₹${totalPrice}\n`;
+    message += `━━━━━━━━━━━━━━━━━━\n\n`;
+    message += `_(Note: I have downloaded my generated order slip image and will attach it in the chat below.)_\n`;
+    message += `Thank you! 🌿`;
+
+    const encodedText = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${KITCHEN_WHATSAPP_NUMBER}?text=${encodedText}`;
+    window.open(whatsappUrl, '_blank');
+  };
 
   const handleDownload = () => {
     if (!imgData) return;
@@ -131,11 +158,21 @@ const Success = ({ clearSelection }) => {
       <div className="flex flex-col gap-3 w-full max-w-sm px-2">
         <button
           onClick={handleDownload}
-          className="w-full relative inline-flex items-center justify-center px-6 py-3.5 bg-primary hover:bg-accent text-paper font-heading text-xs uppercase tracking-widest border border-secondary/40 transition-colors duration-300 shadow-vintage-md rounded-sm group"
+          className="w-full relative inline-flex items-center justify-center px-6 py-3.5 bg-primary hover:bg-accent text-paper font-heading text-xs uppercase tracking-widest border border-secondary/40 transition-colors duration-300 shadow-vintage-md group rounded-sm"
         >
           <span>Download Image</span>
           <span className="absolute inset-0.5 border border-dashed border-secondary/20 group-hover:border-secondary/30 pointer-events-none rounded-sm"></span>
         </button>
+
+        {selectedList && selectedList.length > 0 && (
+          <button
+            onClick={handleSendWhatsApp}
+            className="w-full relative inline-flex items-center justify-center px-6 py-3.5 bg-successColor hover:bg-[#2d4333] text-paper font-heading text-xs uppercase tracking-widest border border-successColor/30 transition-colors duration-300 shadow-vintage-md group rounded-sm"
+          >
+            <span>Send Order via WhatsApp</span>
+            <span className="absolute inset-0.5 border border-dashed border-paper/10 group-hover:border-paper/20 pointer-events-none rounded-sm"></span>
+          </button>
+        )}
 
         <button
           onClick={handleShare}
