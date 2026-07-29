@@ -93,7 +93,7 @@ const Menu = ({ cart, updateQuantity }) => {
   };
 
   return (
-    <div className="py-2 animate-fade-in flex flex-col h-full">
+    <div className="py-2 animate-fade-in flex flex-col">
       
       {/* STICKY HEADER CONTAINER (includes Categories, Search, Filters) */}
       <div className="sticky top-0 bg-paper/95 backdrop-blur-md z-20 -mx-4 px-4 pt-2 border-b border-antique/20 shadow-sm">
