@@ -64,7 +64,7 @@ const Layout = ({ children, totalCount, totalPrice }) => {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-start p-0 md:p-6 select-none">
       {/* Premium Centered Frame (Mobile-first width on desktop) */}
-      <div className="w-full max-w-md md:max-w-xl min-h-screen md:min-h-[850px] md:my-4 parchment-paper vintage-border flex flex-col justify-between overflow-hidden shadow-vintage-lg relative">
+      <div className="w-full max-w-md md:max-w-xl h-screen md:h-[850px] md:my-4 parchment-paper vintage-border flex flex-col justify-between overflow-hidden shadow-vintage-lg relative">
         
         {/* Corner Flourishes */}
         <div className="corner-flourish corner-flourish-tl"></div>
