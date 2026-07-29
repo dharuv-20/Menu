@@ -78,14 +78,23 @@ const Review = ({ cart, updateQuantity, selectedList, totalCount, totalPrice }) 
 
     if (trimmedName.length === 0) {
       setValidationError("Please enter your name before confirming your selection.");
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const mainEl = document.querySelector('main');
+      if (mainEl) mainEl.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
     if (trimmedName.length < 2) {
       setValidationError("Name must be at least 2 characters long.");
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const mainEl = document.querySelector('main');
+      if (mainEl) mainEl.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
     if (trimmedName.length > 40) {
       setValidationError("Name must not exceed 40 characters.");
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const mainEl = document.querySelector('main');
+      if (mainEl) mainEl.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
@@ -272,7 +281,7 @@ const Review = ({ cart, updateQuantity, selectedList, totalCount, totalPrice }) 
 
         <button
           onClick={handleConfirm}
-          disabled={isLoading || guestName.trim().length < 2}
+          disabled={isLoading}
           className="w-full h-14 relative inline-flex items-center justify-center bg-primary hover:bg-accent text-paper font-heading text-xs uppercase tracking-widest border border-secondary/40 transition-colors duration-300 shadow-vintage-md rounded-sm group disabled:opacity-55"
         >
           <span>Confirm Selection</span>
@@ -280,11 +289,10 @@ const Review = ({ cart, updateQuantity, selectedList, totalCount, totalPrice }) 
         </button>
       </div>
 
-      {/* HIDDEN RECEIPT SLIP COMPONENT FOR 1080 x 1920 CANVAS CAPTURE */}
       <div 
         ref={captureTargetRef}
         id="hidden-capture-receipt"
-        className="absolute left-[-9999px] top-[-9999px] w-[1080px] h-[1920px] bg-paper flex flex-col justify-between p-24 select-none relative box-border"
+        className="absolute left-[-9999px] top-[-9999px] w-[1080px] min-h-[1920px] h-auto bg-paper flex flex-col justify-between p-24 select-none relative box-border"
         style={{ 
           fontFamily: "'Roboto Slab', serif",
           backgroundColor: '#F7EEDB',
