@@ -22,7 +22,7 @@ const FloatingCart = ({ totalCount, totalPrice }) => {
 
   return (
     <div 
-      className={`mx-4 mb-2 p-3 bg-primary text-paper border border-secondary/40 shadow-vintage-lg flex justify-between items-center z-30 transition-all duration-300 rounded-sm ${
+      className={`absolute bottom-[72px] left-4 right-4 p-3 bg-primary text-paper border border-secondary/40 shadow-vintage-lg flex justify-between items-center z-30 transition-all duration-300 rounded-sm ${
         pulse ? 'scale-[1.03] border-secondary' : 'scale-100'
       }`}
     >
@@ -52,8 +52,9 @@ const Layout = ({ children, totalCount, totalPrice }) => {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
 
-  // Automatically scroll to the top of the main container when route changes
+  // Automatically scroll to the top of the window and main container when route changes
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
     const mainEl = document.querySelector('main');
     if (mainEl) {
       mainEl.scrollTo({ top: 0, behavior: 'instant' });
