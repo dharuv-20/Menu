@@ -156,6 +156,17 @@ const Success = ({ clearSelection }) => {
 
       {/* Actions */}
       <div className="flex flex-col gap-3 w-full max-w-sm px-2">
+        {selectedList && selectedList.length > 0 && (
+          <button
+            onClick={handleSendWhatsApp}
+            className="w-full relative inline-flex flex-col items-center justify-center px-6 py-3 bg-successColor hover:bg-[#2d4333] text-paper border border-successColor/30 transition-colors duration-300 shadow-vintage-md group rounded-sm"
+          >
+            <span className="font-heading text-xs uppercase tracking-widest font-bold">Place Order</span>
+            <span className="text-[9px] font-body text-paper/85 mt-0.5 tracking-wider italic">via WhatsApp</span>
+            <span className="absolute inset-0.5 border border-dashed border-paper/10 group-hover:border-paper/20 pointer-events-none rounded-sm"></span>
+          </button>
+        )}
+
         <button
           onClick={handleDownload}
           className="w-full relative inline-flex items-center justify-center px-6 py-3.5 bg-primary hover:bg-accent text-paper font-heading text-xs uppercase tracking-widest border border-secondary/40 transition-colors duration-300 shadow-vintage-md group rounded-sm"
@@ -163,16 +174,6 @@ const Success = ({ clearSelection }) => {
           <span>Download Image</span>
           <span className="absolute inset-0.5 border border-dashed border-secondary/20 group-hover:border-secondary/30 pointer-events-none rounded-sm"></span>
         </button>
-
-        {selectedList && selectedList.length > 0 && (
-          <button
-            onClick={handleSendWhatsApp}
-            className="w-full relative inline-flex items-center justify-center px-6 py-3.5 bg-successColor hover:bg-[#2d4333] text-paper font-heading text-xs uppercase tracking-widest border border-successColor/30 transition-colors duration-300 shadow-vintage-md group rounded-sm"
-          >
-            <span>Send Order via WhatsApp</span>
-            <span className="absolute inset-0.5 border border-dashed border-paper/10 group-hover:border-paper/20 pointer-events-none rounded-sm"></span>
-          </button>
-        )}
 
         <button
           onClick={handleShare}
