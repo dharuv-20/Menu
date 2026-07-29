@@ -289,118 +289,121 @@ const Review = ({ cart, updateQuantity, selectedList, totalCount, totalPrice }) 
         </button>
       </div>
 
-      <div 
-        ref={captureTargetRef}
-        id="hidden-capture-receipt"
-        className="absolute left-[-9999px] top-[-9999px] w-[1080px] min-h-[1920px] h-auto bg-paper flex flex-col justify-between p-24 select-none relative box-border"
-        style={{ 
-          fontFamily: "'Roboto Slab', serif",
-          backgroundColor: '#F7EEDB',
-          backgroundImage: `radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.05)), url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.2 0 0 0 0 0.15 0 0 0 0 0.1 0.055 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
-        }}
-      >
-        {/* Thick double border wrapper */}
-        <div className="absolute inset-10 border-[6px] border-double border-antique pointer-events-none rounded-sm"></div>
+      {/* Container wrapper that hides it from the layout flow and prevents scroll overflows */}
+      <div style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}>
+        <div 
+          ref={captureTargetRef}
+          id="hidden-capture-receipt"
+          className="w-[1080px] min-h-[1920px] h-auto bg-paper flex flex-col justify-between p-24 select-none relative box-border"
+          style={{ 
+            fontFamily: "'Roboto Slab', serif",
+            backgroundColor: '#F7EEDB',
+            backgroundImage: `radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.05)), url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.2 0 0 0 0 0.15 0 0 0 0 0.1 0.055 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+          }}
+        >
+          {/* Thick double border wrapper */}
+          <div className="absolute inset-10 border-[6px] border-double border-antique pointer-events-none rounded-sm"></div>
 
-        {/* Thick vintage corner flourishes for capture */}
-        <div className="absolute w-16 h-16 top-14 left-14 border-t-[4px] border-l-[4px] border-antique pointer-events-none"></div>
-        <div className="absolute w-16 h-16 top-14 right-14 border-t-[4px] border-r-[4px] border-antique pointer-events-none"></div>
-        <div className="absolute w-16 h-16 bottom-14 left-14 border-b-[4px] border-l-[4px] border-antique pointer-events-none"></div>
-        <div className="absolute w-16 h-16 bottom-14 right-14 border-b-[4px] border-r-[4px] border-antique pointer-events-none"></div>
+          {/* Thick vintage corner flourishes for capture */}
+          <div className="absolute w-16 h-16 top-14 left-14 border-t-[4px] border-l-[4px] border-antique pointer-events-none"></div>
+          <div className="absolute w-16 h-16 top-14 right-14 border-t-[4px] border-r-[4px] border-antique pointer-events-none"></div>
+          <div className="absolute w-16 h-16 bottom-14 left-14 border-b-[4px] border-l-[4px] border-antique pointer-events-none"></div>
+          <div className="absolute w-16 h-16 bottom-14 right-14 border-b-[4px] border-r-[4px] border-antique pointer-events-none"></div>
 
-        {/* Watermark logo background in center */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-[0.02] pointer-events-none z-0 select-none">
-          <svg viewBox="0 0 100 100" className="w-[600px] h-[600px] stroke-primary fill-none" strokeWidth="0.5">
-            <path d="M50 5 C30 30 30 60 50 95 C70 60 70 30 50 5 Z" />
-            <path d="M50 5 V95" />
-          </svg>
-        </div>
-
-        {/* Top Header Logo */}
-        <div className="text-center pt-8 z-10 flex flex-col items-center justify-center">
-          <img 
-            src={logoImg} 
-            alt="Tatsaaraa Kavan Logo" 
-            className="h-44 w-auto object-contain mix-blend-multiply mb-3" 
-          />
-          <div className="w-80 h-[1.5px] bg-antique/30 mx-auto mt-6"></div>
-        </div>
-
-        {/* Guest & Date Details */}
-        <div className="px-16 z-10 space-y-6">
-          <div className="flex justify-between border-b border-antique/20 pb-3">
-            <span className="text-lg uppercase tracking-[0.2em] text-secondary font-heading font-semibold">Guest</span>
-            <span className="text-xl font-bold text-primary font-body">{guestName.trim()}</span>
-          </div>
-          <div className="flex justify-between border-b border-antique/20 pb-3">
-            <span className="text-lg uppercase tracking-[0.2em] text-secondary font-heading font-semibold">Date</span>
-            <span className="text-xl font-semibold text-primary font-body">
-              {new Date().toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}
-            </span>
-          </div>
-          <div className="flex justify-between border-b border-antique/20 pb-3">
-            <span className="text-lg uppercase tracking-[0.2em] text-secondary font-heading font-semibold">Time</span>
-            <span className="text-xl font-semibold text-primary font-body">
-              {new Date().toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}
-            </span>
-          </div>
-        </div>
-
-        {/* Selected Items list (expanded sizes for 1080x1920) */}
-        <div className="px-16 py-8 z-10 flex-grow flex flex-col justify-start">
-          <h3 className="text-lg uppercase tracking-[0.25em] text-secondary font-heading font-semibold mb-8 border-b border-antique/30 pb-3">
-            Selected Items
-          </h3>
-          
-          <div className="space-y-7">
-            {selectedList.map(({ item, quantity }) => (
-              <div key={item.id} className="flex justify-between items-center py-1">
-                <div className="flex-grow pr-10">
-                  <span className="font-bold text-primary font-heading text-2xl block leading-snug">
-                    {item.name}
-                  </span>
-                  <span className="text-base text-antique/60 font-body block mt-1">
-                    {item.category} • {formatRupees(item.price)} each
-                  </span>
-                </div>
-                <div className="flex items-center gap-16 shrink-0">
-                  <span className="font-bold text-primary font-body text-xl w-14 text-center">
-                    ×{quantity}
-                  </span>
-                  <span className="font-bold text-primary font-heading text-2xl w-28 text-right">
-                    {formatRupees(item.price * quantity)}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Total & Message */}
-        <div className="px-16 pb-12 z-10 space-y-10">
-          <div className="border-t-[4px] border-double border-antique pt-8 flex justify-between items-center font-heading text-2xl font-bold text-primary tracking-wider">
-            <span>GRAND TOTAL</span>
-            <span className="text-3xl">{formatRupees(totalPrice)}</span>
-          </div>
-
-          <div className="text-center pt-2">
-            <div className="w-24 h-[1.5px] bg-antique/30 mx-auto mb-5"></div>
-            <p className="text-xl font-heading italic text-secondary font-semibold tracking-wide">
-              Thank you for dining with us.
-            </p>
-            <p className="text-base text-primary/70 font-body mt-2">
-              We hope you enjoy your meal.
-            </p>
-          </div>
-
-          {/* Footer Logo Illustration */}
-          <div className="text-center pt-2 opacity-35 flex flex-col items-center">
-            <svg viewBox="0 0 100 25" className="w-36 h-10 fill-none stroke-antique" strokeWidth="1.25">
-              <path d="M10 20 L30 5 L50 18 L70 2 L90 20" />
+          {/* Watermark logo background in center */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-[0.02] pointer-events-none z-0 select-none">
+            <svg viewBox="0 0 100 100" className="w-[600px] h-[600px] stroke-primary fill-none" strokeWidth="0.5">
+              <path d="M50 5 C30 30 30 60 50 95 C70 60 70 30 50 5 Z" />
+              <path d="M50 5 V95" />
             </svg>
-            <span className="text-xs font-body tracking-[0.25em] text-antique mt-2.5 uppercase">
-              tatsaaraakavan.com
-            </span>
+          </div>
+
+          {/* Top Header Logo */}
+          <div className="text-center pt-8 z-10 flex flex-col items-center justify-center">
+            <img 
+              src={logoImg} 
+              alt="Tatsaaraa Kavan Logo" 
+              className="h-44 w-auto object-contain mix-blend-multiply mb-3" 
+            />
+            <div className="w-80 h-[1.5px] bg-antique/30 mx-auto mt-6"></div>
+          </div>
+
+          {/* Guest & Date Details */}
+          <div className="px-16 z-10 space-y-6">
+            <div className="flex justify-between border-b border-antique/20 pb-3">
+              <span className="text-lg uppercase tracking-[0.2em] text-secondary font-heading font-semibold">Guest</span>
+              <span className="text-xl font-bold text-primary font-body">{guestName.trim()}</span>
+            </div>
+            <div className="flex justify-between border-b border-antique/20 pb-3">
+              <span className="text-lg uppercase tracking-[0.2em] text-secondary font-heading font-semibold">Date</span>
+              <span className="text-xl font-semibold text-primary font-body">
+                {new Date().toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}
+              </span>
+            </div>
+            <div className="flex justify-between border-b border-antique/20 pb-3">
+              <span className="text-lg uppercase tracking-[0.2em] text-secondary font-heading font-semibold">Time</span>
+              <span className="text-xl font-semibold text-primary font-body">
+                {new Date().toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}
+              </span>
+            </div>
+          </div>
+
+          {/* Selected Items list (expanded sizes for 1080x1920) */}
+          <div className="px-16 py-8 z-10 flex-grow flex flex-col justify-start">
+            <h3 className="text-lg uppercase tracking-[0.25em] text-secondary font-heading font-semibold mb-8 border-b border-antique/30 pb-3">
+              Selected Items
+            </h3>
+            
+            <div className="space-y-7">
+              {selectedList.map(({ item, quantity }) => (
+                <div key={item.id} className="flex justify-between items-center py-1">
+                  <div className="flex-grow pr-10">
+                    <span className="font-bold text-primary font-heading text-2xl block leading-snug">
+                      {item.name}
+                    </span>
+                    <span className="text-base text-antique/60 font-body block mt-1">
+                      {item.category} • {formatRupees(item.price)} each
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-16 shrink-0">
+                    <span className="font-bold text-primary font-body text-xl w-14 text-center">
+                      ×{quantity}
+                    </span>
+                    <span className="font-bold text-primary font-heading text-2xl w-28 text-right">
+                      {formatRupees(item.price * quantity)}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Total & Message */}
+          <div className="px-16 pb-12 z-10 space-y-10">
+            <div className="border-t-[4px] border-double border-antique pt-8 flex justify-between items-center font-heading text-2xl font-bold text-primary tracking-wider">
+              <span>GRAND TOTAL</span>
+              <span className="text-3xl">{formatRupees(totalPrice)}</span>
+            </div>
+
+            <div className="text-center pt-2">
+              <div className="w-24 h-[1.5px] bg-antique/30 mx-auto mb-5"></div>
+              <p className="text-xl font-heading italic text-secondary font-semibold tracking-wide">
+                Thank you for dining with us.
+              </p>
+              <p className="text-base text-primary/70 font-body mt-2">
+                We hope you enjoy your meal.
+              </p>
+            </div>
+
+            {/* Footer Logo Illustration */}
+            <div className="text-center pt-2 opacity-35 flex flex-col items-center">
+              <svg viewBox="0 0 100 25" className="w-36 h-10 fill-none stroke-antique" strokeWidth="1.25">
+                <path d="M10 20 L30 5 L50 18 L70 2 L90 20" />
+              </svg>
+              <span className="text-xs font-body tracking-[0.25em] text-antique mt-2.5 uppercase">
+                tatsaaraakavan.com
+              </span>
+            </div>
           </div>
         </div>
       </div>

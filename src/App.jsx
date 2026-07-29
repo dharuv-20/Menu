@@ -21,14 +21,15 @@ const FloatingCart = ({ totalCount, totalPrice }) => {
   }, [totalCount]);
 
   return (
-    <div 
-      className={`absolute bottom-[72px] left-4 right-4 p-3 bg-primary text-paper border border-secondary/40 shadow-vintage-lg flex justify-between items-center z-30 transition-all duration-300 rounded-sm ${
+    <Link 
+      to="/review"
+      className={`absolute bottom-[72px] left-4 right-4 p-3 bg-primary text-paper border border-secondary/40 shadow-vintage-lg flex justify-between items-center z-30 transition-all duration-300 rounded-sm hover:bg-accent active:scale-[0.98] ${
         pulse ? 'scale-[1.03] border-secondary' : 'scale-100'
       }`}
     >
       <div className="flex items-center gap-2">
-        <div className="flex flex-col">
-          <span className="text-[11px] font-heading font-semibold uppercase tracking-wider">
+        <div className="flex flex-col text-left">
+          <span className="text-[11px] font-heading font-semibold uppercase tracking-wider text-paper">
             {totalCount} {totalCount === 1 ? 'Item' : 'Items'} Selected
           </span>
           <span className="text-[10px] font-body text-secondary font-medium">
@@ -36,14 +37,11 @@ const FloatingCart = ({ totalCount, totalPrice }) => {
           </span>
         </div>
       </div>
-      <Link 
-        to="/review" 
-        className="flex items-center gap-1 text-[10px] font-heading uppercase tracking-widest text-secondary hover:text-paper transition-colors duration-200 font-bold"
-      >
+      <div className="flex items-center gap-1 text-[10px] font-heading uppercase tracking-widest text-secondary font-bold">
         <span>Proceed</span>
         <span className="text-xs">→</span>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };
 
