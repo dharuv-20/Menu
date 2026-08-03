@@ -16,7 +16,7 @@ const dataURLtoFile = (dataurl, filename) => {
   return new File([u8arr], filename, { type: mime });
 };
 
-const KITCHEN_WHATSAPP_NUMBER = "919996461616"; // Official Tatsaaraa Kavan Kitchen WhatsApp Number
+const KITCHEN_WHATSAPP_NUMBER = "917505487954"; // Official Tatsaaraa Kavan Kitchen WhatsApp Number
 
 const Success = ({ clearSelection }) => {
   const location = useLocation();
